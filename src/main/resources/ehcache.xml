@@ -1,0 +1,46 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="false"
+		 monitoring="autodetect" dynamicConfig="true">
+	
+	<diskStore path="java.io.tmpdir" />
+
+	<!-- 
+		timeToIdleSeconds="300"(5분)  : 5분동안 사용안하면 cache out
+		timeToLiveSeconds="600"(10분) : 10분 지나면 사용여부와 상관없이 cache out
+	-->
+	<!-- 
+		LRU : 가장 오랫동안 참조되지 않은것부터
+		LFU : 가장 참조횟수가 적은것부터 
+	-->
+	<defaultCache 
+		maxEntriesLocalHeap="10000" 
+		maxEntriesLocalDisk="10000000" 
+		eternal="false"
+		timeToIdleSeconds="120" 
+		timeToLiveSeconds="120" 
+		diskSpoolBufferSizeMB="30"
+		diskExpiryThreadIntervalSeconds="120"
+		memoryStoreEvictionPolicy="LRU">
+		<persistence strategy="localTempSwap" />
+	</defaultCache>
+
+	<cache name="sampleCache" 
+		maxEntriesLocalHeap="10000"
+		maxEntriesLocalDisk="10000000" 
+		eternal="false" 
+		timeToIdleSeconds="300"
+		timeToLiveSeconds="600"
+		diskSpoolBufferSizeMB="20"
+		memoryStoreEvictionPolicy="LFU">
+		<persistence strategy="localTempSwap" />
+	</cache>
+
+	<cache name="tempCache" 
+		maxEntriesLocalHeap="0"
+		maxEntriesLocalDisk="0" 
+		eternal="true"
+		diskSpoolBufferSizeMB="20"
+		memoryStoreEvictionPolicy="LFU">
+		<persistence strategy="localTempSwap" />
+	</cache>
+</ehcache>
