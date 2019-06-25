@@ -15,7 +15,7 @@
 	<cache:annotation-driven cache-manager="cacheManager" />
 	<mvc:annotation-driven />
 
-	<mvc:resources mapping="/resources/scripts/**" location="/resources/scripts/" /> 
+	<mvc:resources mapping="/resources/scripts/**" location="/resources/scripts/" />
 		
 	<mvc:interceptors>
 		<mvc:interceptor>
